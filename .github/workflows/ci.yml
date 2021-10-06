@@ -46,7 +46,7 @@ jobs:
       - name: Check the Symfony console
         run: php bin/console -V
 
-      # —— Code style —— (Based on this package: https://github.com/OskarStark/php-cs-fixer-ga)
+      # —— Code style —— (Based on this package: calebporzio/simple-php-cs-fixer)
       - name: PHP-CS-Fixer
         uses: docker://oskarstark/php-cs-fixer-ga
         with:
