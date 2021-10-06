@@ -1,9 +1,5 @@
 name: Tests
-on:
-  push:
-    branches:
-      - master
-      - develop
+on: [push, pull_request]
 jobs:
   php-unit-and-functional-tests:
     runs-on: ubuntu-20.04
