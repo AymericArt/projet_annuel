@@ -34,7 +34,13 @@
                         </li>
                     </ul>
                     <div>
-                        <a href="" class="btn btn-theme">BUY</a>
+                        {% if not app.user()  %}
+                        <a href="{{ path('app_login') }}" class="btn btn-theme">login</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-theme">register</a>
+                        {% else %}
+                            <a href="{{ path('app_logout') }}" class="btn btn-theme">logout</a>
+                        {% endif %}
+
                     </div>
 
                 </div>
