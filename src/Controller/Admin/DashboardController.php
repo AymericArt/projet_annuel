@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Film;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,7 +37,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linktoDashboard('Front', 'fa fa-home'),
             // MenuItem::linkToRoute('Front', 'fa fa-home', '/'),
             MenuItem::linktoDashboard('Espace administrateur', 'fa fa-lock'),
-            MenuItem::linktoDashboard('Gérer les films', 'fa fa-film'),
+            MenuItem::linkToCrud('Gérer les films', 'fa fa-film', Film::class),
             MenuItem::linkToCrud('Gérer les utilisateurs', 'fa fa-users', User::class),
         ];
         
