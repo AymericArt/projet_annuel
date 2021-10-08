@@ -37,6 +37,26 @@ class Film
      */
     private $commentaires;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $duree;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Genre1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Genre2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bandeAnnonce;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +106,54 @@ class Film
     public function setCommentaires(?string $commentaires): self
     {
         $this->commentaires = $commentaires;
+
+        return $this;
+    }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getGenre1(): ?string
+    {
+        return $this->Genre1;
+    }
+
+    public function setGenre1(string $Genre1): self
+    {
+        $this->Genre1 = $Genre1;
+
+        return $this;
+    }
+
+    public function getGenre2(): ?string
+    {
+        return $this->Genre2;
+    }
+
+    public function setGenre2(string $Genre2): self
+    {
+        $this->Genre2 = $Genre2;
+
+        return $this;
+    }
+
+    public function getBandeAnnonce(): ?string
+    {
+        return $this->bandeAnnonce;
+    }
+
+    public function setBandeAnnonce(?string $bandeAnnonce): self
+    {
+        $this->bandeAnnonce = $bandeAnnonce;
 
         return $this;
     }

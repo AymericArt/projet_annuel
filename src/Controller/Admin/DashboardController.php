@@ -34,8 +34,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linktoDashboard('Front', 'fa fa-home'),
-            // MenuItem::linkToRoute('Front', 'fa fa-home', '/'),
+            MenuItem::linkToRoute('Front', 'fa fa-home', 'home'),
             MenuItem::linktoDashboard('Espace administrateur', 'fa fa-lock'),
             MenuItem::linkToCrud('Gérer les films', 'fa fa-film', Film::class),
             MenuItem::linkToCrud('Gérer les utilisateurs', 'fa fa-users', User::class),
