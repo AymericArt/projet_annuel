@@ -1,1 +1,57 @@
-<nav></nav>
+<nav>
+    <header class="header header-horizontal header-view-pannel">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{{path('home')}}">PAG</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('front_film')}}">Films</a>
+                        </li>
+    
+                        {%  if is_granted('ROLE_SUPER_ADMIN')  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin') }}" class="btn btn-theme">Back-office</a>
+                        </li>
+                        {% endif %}
+    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Aller plus loin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Obtenir une suggestion de films</a>
+                                <a class="dropdown-item" href="#">Mes films</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                    </ul>
+                    <div>
+                        {% if not app.user()  %}
+                        <a href="{{ path('app_login') }}" class="btn btn-theme">login</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-theme">register</a>
+    
+                        {% else %}
+                        <a href="{{ path('app_logout') }}" class="btn btn-theme">logout</a>
+                        {% endif %}
+    
+                    </div>
+    
+                </div>
+            </nav>
+        </div>
+    </header>
+</nav>
