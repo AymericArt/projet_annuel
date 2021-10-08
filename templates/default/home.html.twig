@@ -37,10 +37,13 @@
                         {% if not app.user()  %}
                         <a href="{{ path('app_login') }}" class="btn btn-theme">login</a>
                         <a href="{{ path('app_register') }}" class="btn btn-theme">register</a>
+                     
                         {% else %}
                             <a href="{{ path('app_logout') }}" class="btn btn-theme">logout</a>
                         {% endif %}
-
+                        {%  if is_granted('ROLE_SUPER_ADMIN')  %}
+                        <a href="{{ path('admin') }}" class="btn btn-theme">Back-office</a>
+                    {% endif %}
                     </div>
 
                 </div>
