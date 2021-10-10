@@ -19,6 +19,37 @@ class FilmRepository extends ServiceEntityRepository
         parent::__construct($registry, Film::class);
     }
 
+    public function search($search)
+    {
+
+        $qb = $this->createQueryBuilder("f");
+
+        if (key_exists("duree", $search)) {
+
+            $qb
+                ->andWhere('f.duree < :duree')
+                ->setParameter(':duree', $search['duree'])
+            ;
+        }
+
+        if (key_exists("category", $search)) {
+            $categoryId = [];
+
+            foreach ($search["category"] as $category) {
+                $categoryId[] = $category->getId();
+            }
+
+            $qb
+                ->leftJoin("f.category", "c")
+                ->andWhere("c.id IN (:category)")
+                ->setParameter(":category", $categoryId)
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
+
     // /**
     //  * @return Film[] Returns an array of Film objects
     //  */

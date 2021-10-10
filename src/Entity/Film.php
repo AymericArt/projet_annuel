@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +25,7 @@ class Film
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $resume;
 
@@ -43,19 +45,25 @@ class Film
     private $duree;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Genre1;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Genre2;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $bandeAnnonce;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="movieHistory")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="films")
+     */
+    private $category;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->category = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,29 +130,6 @@ class Film
         return $this;
     }
 
-    public function getGenre1(): ?string
-    {
-        return $this->Genre1;
-    }
-
-    public function setGenre1(string $Genre1): self
-    {
-        $this->Genre1 = $Genre1;
-
-        return $this;
-    }
-
-    public function getGenre2(): ?string
-    {
-        return $this->Genre2;
-    }
-
-    public function setGenre2(string $Genre2): self
-    {
-        $this->Genre2 = $Genre2;
-
-        return $this;
-    }
 
     public function getBandeAnnonce(): ?string
     {
@@ -157,4 +142,66 @@ class Film
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addMovieHistory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeMovieHistory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+
+
 }

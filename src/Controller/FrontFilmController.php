@@ -10,14 +10,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontFilmController extends AbstractController
 {
     /**
-     * @Route("/front/film", name="front_film")
+     * @Route("/filmotheque", name="filmotheque")
      */
     public function index(FilmRepository $filmRepository): Response
     {
         $films = $filmRepository->findAll();
-        return $this->render('front_film/index.html.twig', [
+
+        return $this->render('default/filmotheque.html.twig', [
           'films' => $films
         ]);
+
     }
 
 }

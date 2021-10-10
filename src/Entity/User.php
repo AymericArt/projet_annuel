@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,13 +30,23 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Film::class, inversedBy="users")
+     */
+    private $movieHistory;
+
+    public function __construct()
+    {
+        $this->movieHistory = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -115,5 +127,29 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Film[]
+     */
+    public function getMovieHistory(): Collection
+    {
+        return $this->movieHistory;
+    }
+
+    public function addMovieHistory(Film $movieHistory): self
+    {
+        if (!$this->movieHistory->contains($movieHistory)) {
+            $this->movieHistory[] = $movieHistory;
+        }
+
+        return $this;
+    }
+
+    public function removeMovieHistory(Film $movieHistory): self
+    {
+        $this->movieHistory->removeElement($movieHistory);
+
+        return $this;
     }
 }
