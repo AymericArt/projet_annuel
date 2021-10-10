@@ -24,7 +24,7 @@ class FilmRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder("f");
 
-        if (key_exists("duree", $search)) {
+        if (key_exists("duree", $search) && in_array("duree", $search)) {
 
             $qb
                 ->andWhere('f.duree < :duree')
@@ -32,7 +32,7 @@ class FilmRepository extends ServiceEntityRepository
             ;
         }
 
-        if (key_exists("category", $search)) {
+        if (key_exists("category", $search) && in_array("category", $search)) {
             $categoryId = [];
 
             foreach ($search["category"] as $category) {
