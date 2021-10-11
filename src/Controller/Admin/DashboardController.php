@@ -18,18 +18,13 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        // REstrictions admin
-//        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
-        // return parent::index();
         return $this->render('admin/admin-dashboard.html.twig', []);
     }
 
     public function configureDashboard(): Dashboard
     {
-        // REstrictions admin
-//        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
-        return Dashboard::new()
-            ->setTitle('Projet Annuel : Appli Ciné');
+
+        return Dashboard::new()->setTitle('Projet Annuel : Appli Ciné');
     }
 
     public function configureMenuItems(): iterable
@@ -41,8 +36,6 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Gérer les catégories', 'fa fa-film', Category::class),
             MenuItem::linkToCrud('Gérer les utilisateurs', 'fa fa-users', User::class),
         ];
-        
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
     
 }

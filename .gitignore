@@ -44,4 +44,6 @@ symfony.lock
 /public/build/
 npm-debug.log
 yarn-error.log
+
+public/upload/film/*
 ###< symfony/webpack-encore-bundle ###

@@ -16,10 +16,7 @@ class FrontFilmController extends AbstractController
     {
         $films = $filmRepository->findAll();
 
-        return $this->render('default/filmotheque.html.twig', [
-          'films' => $films
-        ]);
+        return $this->render('default/filmotheque.html.twig', [ 'films' => $films ]);
 
     }
-
 }
