@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faire une recherche{% endblock %}
+
+{% block body %}
+    <section class="section-long">
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Effectuer une recherche</h2>
+
+                {% form_theme searchForm 'bootstrap_4_layout.html.twig' %}
+
+                {{ form_start(searchForm) }}
+{#                    <div class="row">#}
+{#                        {{ form_row(searchForm.category, {'attr': {"class": "form-control"}} ) }}#}
+{#                    </div>#}
+{#                    <div class="row">#}
+{#                        {{ form_row(searchForm.duree, {'attr': {"class": "form-group"}}) }}#}
+{#                    </div>#}
+
+{#                    <div>#}
+{#                        <button type="submit" class="btn btn-theme">valider</button>#}
+{#                    </div>#}
+                {{ form_end(searchForm) }}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

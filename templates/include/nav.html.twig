@@ -1,1 +1,50 @@
-<nav></nav>
+<nav>
+    <header class="header header-horizontal header-view-pannel">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
+                <a class="navbar-brand" href="{{path('home')}}">PAG</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('filmotheque')}}">Films</a>
+                        </li>
+    
+                        {%  if is_granted('ROLE_SUPER_ADMIN')  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin') }}" class="btn btn-theme">Back-office</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('search_film') }}" class="btn btn-theme">Rechercher un film</a>
+                        </li>
+                    </ul>
+                    {% if app.user %}
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Paramètres</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('historique') }}">Historique</a>
+                                <a class="dropdown-item" href="#">Mes préferences</a>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="{{ path('app_logout') }}" class="btn btn-theme">Se deconnecter</a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{{ path('app_login') }}" class="btn btn-theme">Connexion</a>
+                            <a href="{{ path('app_register') }}" class="btn btn-theme">Inscription</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+    </header>
+</nav>

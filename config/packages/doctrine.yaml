@@ -1,5 +1,6 @@
 doctrine:
     dbal:
+        schema_filter: ~^(migration_versions|table_1|table_2|table_3)$~
         url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
