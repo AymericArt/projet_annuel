@@ -16,12 +16,15 @@ class UserCrudController extends AbstractCrudController
 
     public function createEntity(string $entityFqcn): User
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         $user = new User();
         return $user;
     }
 
     public function configureFields(string $pageName): iterable
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
         return [
             IdField::new('id'),
             TextField::new('email'),
