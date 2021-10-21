@@ -11,61 +11,73 @@
             </div>
         </div>
     </section>
+    {% if films %}
     {% for film in films %}
-        <section class="section-long">
-            <div class="container">
-                {# <div class="section-head">
-                    <h2 class="section-title text-uppercase">Now in play</h2>
-                    <p class="section-text">Dates: 13 - 15 february 2019</p>
-                </div> #}
-                <article class="movie-line-entity">
-                    <div class="entity-poster" data-role="hover-wrap">
-                        <div class="embed-responsive embed-responsive-poster">
-                            <img class="embed-responsive-item" src="https://via.placeholder.com/340x510" alt="" />
-                        </div>
-                        <div class="d-over bg-theme-lighted collapse animated faster" data-show-class="fadeIn show" data-hide-class="fadeOut show">
-                            {% if film.bandeAnnonce %}
-                                <div class="entity-play">
-                                    <a class="action-icon-theme action-icon-bordered rounded-circle" href="{{ film.bandeAnnonce }}"
-                                        data-magnific-popup="iframe">
-                                        <span class="icon-content"><i class="fas fa-play"></i></span>
-                                    </a>
-                                </div>
-                            {% else %}
-                                <span>Pas de bande annonce disponible</span>
-                            {% endif %}
-                        </div>
+    <section class="section-long">
+        <div class="container">
+            {# <div class="section-head">
+                <h2 class="section-title text-uppercase">Now in play</h2>
+                <p class="section-text">Dates: 13 - 15 february 2019</p>
+            </div> #}
+            <article class="movie-line-entity">
+                <div class="entity-poster" data-role="hover-wrap">
+                    <div class="embed-responsive embed-responsive-poster">
+                        <img class="embed-responsive-item" src="https://via.placeholder.com/340x510" alt="" />
                     </div>
-                    <div class="entity-content">
-                        <h4 class="entity-title">
-                            <a class="content-link" href="movie-info-sidebar-right.html">{{ film.name }} - {{ film.realisateur }}</a>
-                        </h4>
-                        <div class="entity-category">
-                            {% for category in film.category %}
-                                <a class="content-link" href="movies-blocks.html">{{ category.name }}</a>{% if not loop.last %} - {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="entity-info">
-                            <div class="info-lines">
-                                <div class="info info-short">
-                                    <span class="text-theme info-icon"><i class="fas fa-star"></i></span>
-                                    <span class="info-text">8,1</span>
-                                    <span class="info-rest">/10</span>
-                                </div>
-                                <div class="info info-short">
-                                    <span class="text-theme info-icon"><i class="fas fa-clock"></i></span>
-                                    <span class="info-text">{{ film.duree }}</span>
-                                    <span class="info-rest">&nbsp;min</span>
-                                </div>
+                    <div class="d-over bg-theme-lighted collapse animated faster" data-show-class="fadeIn show" data-hide-class="fadeOut show">
+                        {% if film.bandeAnnonce %}
+                            <div class="entity-play">
+                                <a class="action-icon-theme action-icon-bordered rounded-circle" href="{{ film.bandeAnnonce }}"
+                                    data-magnific-popup="iframe">
+                                    <span class="icon-content"><i class="fas fa-play"></i></span>
+                                </a>
                             </div>
-                        </div>
-                        <p class="text-short entity-text">{{ film.resume | raw }}</p>
-                        {% if film.commentaires %}
-                            <p class="entity-text" style="color: blue; margin-left: 25px;">{{ film.commentaires }}</p>
+                        {% else %}
+                            <span>Pas de bande annonce disponible</span>
                         {% endif %}
                     </div>
-                </article>
-            </div>
-        </section>
-    {% endfor %}
+                </div>
+                <div class="entity-content">
+                    <h4 class="entity-title">
+                        <a class="content-link" href="movie-info-sidebar-right.html">{{ film.name }} - {{ film.realisateur }}</a>
+                    </h4>
+                    <div class="entity-category">
+                        {% for category in film.category %}
+                            <a class="content-link" href="movies-blocks.html">{{ category.name }}</a>{% if not loop.last %} - {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="entity-info">
+                        <div class="info-lines">
+                            <div class="info info-short">
+                                <span class="text-theme info-icon"><i class="fas fa-star"></i></span>
+                                <span class="info-text">8,1</span>
+                                <span class="info-rest">/10</span>
+                            </div>
+                            <div class="info info-short">
+                                <span class="text-theme info-icon"><i class="fas fa-clock"></i></span>
+                                <span class="info-text">{{ film.duree }}</span>
+                                <span class="info-rest">&nbsp;min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-short entity-text">{{ film.resume | raw }}</p>
+                    {% if film.commentaires %}
+                        <p class="entity-text" style="color: blue; margin-left: 25px;">{{ film.commentaires }}</p>
+                    {% endif %}
+                </div>
+            </article>
+        </div>
+    </section>
+{% endfor %}
+{% else %}
+<section class="section-long">
+    <div class="container">
+        <div >
+            <p class="section-text">Aucun résultat....</p>
+            <p class="section-text"><a class="btn btn-theme" href="{{ path('search_film') }}"> Retourner à la recherche</a></p>
+        </div>
+    </div>
+</section>
+    {% endif %}
+
 {% endblock %}
