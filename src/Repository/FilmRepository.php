@@ -24,15 +24,15 @@ class FilmRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder("f");
 
-        if (key_exists("duree", $search)) {
+        if (key_exists("duree", $search) && $search['duree'] != null) {
 
             $qb
-                ->andWhere('f.duree > :duree')
-                ->setParameter(':duree', $search['duree'])
-            ;
+                ->andWhere('f.duree <= :duree')
+                ->setParameter(':duree', $search['duree']);
         }
 
-        if (key_exists("category", $search)) {
+        if (key_exists("category", $search) && isset($search['category'])) {
+
             $categoryId = [];
 
             foreach ($search["category"] as $category) {
@@ -42,12 +42,28 @@ class FilmRepository extends ServiceEntityRepository
             $qb
                 ->leftJoin("f.category", "c")
                 ->andWhere("c.id IN (:category)")
-                ->setParameter(":category", $categoryId)
-            ;
+                ->setParameter(":category", $categoryId);
         }
 
-        return $qb->getQuery()->getResult();
+        if (key_exists("name", $search) && $search['name'] != null) {
 
+            $nameReal = $search['name'];
+
+            $qb
+                ->andWhere('f.realisateur LIKE :searchterm')
+                ->setParameter('searchterm', '%' . $nameReal . '%');
+        }
+
+        if (key_exists("title", $search) && $search['title'] != null) {
+
+            $title = $search['title'];
+
+            $qb
+                ->andWhere('f.name LIKE :searchterm')
+                ->setParameter('searchterm', '%' . $title . '%');
+        }
+  
+        return $qb->getQuery()->getResult();
     }
 
     // /**
