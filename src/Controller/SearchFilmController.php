@@ -32,7 +32,7 @@ class SearchFilmController extends AbstractController
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
 
             $films = $filmRepository->search($searchForm->getData());
-
+         
             return $this->render('default/filmotheque-search.html.twig', [
                 'films' => $films
             ]);

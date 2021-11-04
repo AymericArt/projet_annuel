@@ -18,17 +18,19 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return $this->render('admin/admin-dashboard.html.twig', []);
     }
 
     public function configureDashboard(): Dashboard
     {
-
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return Dashboard::new()->setTitle('Projet Annuel : Appli Ciné');
     }
 
     public function configureMenuItems(): iterable
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return [
             MenuItem::linkToRoute('Front', 'fa fa-home', 'home'),
             MenuItem::linktoDashboard('Espace administrateur', 'fa fa-lock'),

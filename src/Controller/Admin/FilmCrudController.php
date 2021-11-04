@@ -25,13 +25,14 @@ class FilmCrudController extends AbstractCrudController
 
     public function createEntity(string $entityFqcn): Film
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return new Film();
     }
 
 
     public function configureFields(string $pageName): iterable
     {
-
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
         return [
             TextField::new('name', 'Titre du film'),
             TextEditorField::new('resume', 'Résumé'),

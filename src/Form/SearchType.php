@@ -3,12 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Category;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class SearchType extends AbstractType
 {
@@ -16,19 +18,37 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('category', EntityType::class, [
+                'label' => 'Catégorie',
                 "class" => Category::class,
                 'choice_label' => 'name',
-                "multiple" => true
+                "multiple" => true,
+                'required' => false
+
             ])
 
-            ->add('duree')
+            ->add('name',  TextType::class, [
+                'label' => 'Nom réalisateur',
+                'required' => false
+            ])
+
+            ->add('title',  TextType::class, [
+                'label' => 'Titre du film',
+                'required' => false
+            ])
+
+            ->add(
+                'duree', IntegerType::class,
+                [
+                    'label' => 'Durée maximum (en minutes)',
+                    'required' => false
+                ]
+            )
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-theme',
                     'label' => 'Valider'
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
