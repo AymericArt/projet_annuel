@@ -21,7 +21,12 @@
                 <article class="movie-line-entity">
                     <div class="entity-poster" data-role="hover-wrap">
                         <div class="embed-responsive embed-responsive-poster">
-                            <img class="embed-responsive-item" src="https://via.placeholder.com/340x510" alt="" />
+                            {% if film.image %}
+                                <img class="embed-responsive-item" src="{{ asset('upload/images/film/' ~ film.image) }}" alt=""/>
+                            {% else %}
+                                <img class="embed-responsive-item" src="http://via.placeholder.com/340x510" alt="{{film.name}}"/>
+                            {% endif %}
+                            {# <img class="embed-responsive-item" src="https://via.placeholder.com/340x510" alt="" /> #}
                         </div>
                         <div class="d-over bg-theme-lighted collapse animated faster" data-show-class="fadeIn show" data-hide-class="fadeOut show">
                             {% if film.bandeAnnonce %}
@@ -37,8 +42,8 @@
                         </div>
                     </div>
                     <div class="entity-content">
-                        <h4 class="entity-title">
-                            <a class="content-link" href="movie-info-sidebar-right.html">{{ film.name }} - {{ film.realisateur }}</a>
+                        <h4 class="entity-title"><a class="content-link" href=" fiche/film?id={{ film.id }} ">{{ film.name }}	- {{ film.realisateur }}</a>
+
                         </h4>
                         <div class="entity-category">
                             {% for category in film.category %}

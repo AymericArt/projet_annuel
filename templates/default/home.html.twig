@@ -34,7 +34,7 @@
                                         </a>
                                     </div>
                                     <h4 class="entity-title">
-                                        <a class="content-link" href="movie-info-sidebar-right.html">{{ film.name }}</a>
+                                        <a class="content-link" href="fiche/film?id={{ film.id }}">{{ film.name }}</a>
                                     </h4>
                                     <div class="entity-category">
                                         {% for category in film.category %}
@@ -99,17 +99,22 @@
                     </div>
                     <div class="d-background bg-theme-lighted collapse animated faster" data-show-class="fadeIn show"
                         data-hide-class="fadeOut show">
-                        <div class="entity-play">
-                            <a class="action-icon-theme action-icon-bordered rounded-circle"
-                                href="https://www.youtube.com/watch?v=d96cjJhvlMA" data-magnific-popup="iframe">
-                                <span class="icon-content"><i class="fas fa-play"></i></span>
-                            </a>
-                        </div>
+                        {% if film.bandeAnnonce %}
+                            <div class="entity-play">
+                                <a class="action-icon-theme action-icon-bordered rounded-circle" href="{{ film.bandeAnnonce }}" data-magnific-popup="iframe">
+                                    <span class="icon-content">
+                                        <i class="fas fa-play"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        {% else %}
+                            <span>Pas de bande annonce disponible</span>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="entity-content">
                     <h4 class="entity-title">
-                        <a class="content-link" href="movie-info-sidebar-right.html">{{ film.name }}</a>
+                        <a class="content-link" href="fiche/film?id={{ film.id }}">{{ film.name }}</a>
                     </h4>
                     <div class="entity-category">
                         {% for category in film.category %}
